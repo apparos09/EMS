@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8807766757911861258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720399440158785242}
+  - component: {fileID: 8255859112656522611}
+  m_Layer: 0
+  m_Name: Power Info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &720399440158785242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807766757911861258}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8255859112656522611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807766757911861258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39cf5f64ea3d3474ea5ad6f51f0ac584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nothing: {fileID: 7257338184668169907, guid: 8893df8520b5e1242bbde96f331dad37, type: 3}
+  pointsPlus: {fileID: 5864321008241972459, guid: d24b9c4acdee7b64f81e1839c8dc3aa4, type: 3}
+  pointsMinus: {fileID: 3464867747759636638, guid: d7f73ee8e6fdab2488f2ed8bfde29792, type: 3}
+  equationShorten: {fileID: 7211099999973385128, guid: 5ac52a74279c3a4449e0433207a3624a, type: 3}
+  equationLengthen: {fileID: 8116139796157289246, guid: d3b2a870491f32f4db78302cabca6545, type: 3}
+  pointsTransfer: {fileID: 3332158248031224689, guid: 3efa813638b8df840b0eb645511689ae, type: 3}
+  pointsBlock: {fileID: 5172988381001421721, guid: 767928f027bb97d4ab1b9ad20903c209, type: 3}
+  twist: {fileID: 5356708047269608481, guid: abdc29da6e7cd4641b8f25818345a883, type: 3}
+  defaultSymbol: {fileID: 21300000, guid: 17bee2e09afb6914e9e82a388e1d067f, type: 3}
+  nothingSymbol: {fileID: 21300000, guid: a51b9a39897bf1444873403fe5079abf, type: 3}
+  pointsPlusSymbol: {fileID: 21300000, guid: cdf57b3c75079a2469ca8f950ca7b8dc, type: 3}
+  pointsMinusSymbol: {fileID: 21300000, guid: f686caba796f24b409d963688a98f503, type: 3}
+  equationShortenSymbol: {fileID: 21300000, guid: 0a0c78c2c35959b4a863e14219553d96, type: 3}
+  equationLengthenSymbol: {fileID: 21300000, guid: 0ebafb749d9071e4b800d2ba5f33b000, type: 3}
+  pointsTransferSymbol: {fileID: 21300000, guid: 9f5d33a089d8e0f49a3c0228584b336d, type: 3}
+  pointsBlockSymbol: {fileID: 21300000, guid: 957eecf02d14ee040b2682e89d84d0bf, type: 3}
+  twistSymbol: {fileID: 21300000, guid: 085f8b28901f4e04e82a31378229d4a9, type: 3}
