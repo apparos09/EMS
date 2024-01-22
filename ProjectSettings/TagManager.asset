@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TTS
+  - SFX
+  - BGM
+  - Area
+  - Challenger
+  - Puzzle Mechanic
+  - Puzzle Value
   layers:
   - Default
   - TransparentFX
@@ -40,4 +47,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1556896743
+    locked: 0
+  - name: World Challenger
+    uniqueID: 932073359
+    locked: 0
+  - name: Puzzle Render
+    uniqueID: 2901614327
+    locked: 0
+  - name: Puzzle Object
+    uniqueID: 2462429743
+    locked: 0
+  - name: Puzzle Value
+    uniqueID: 836707059
+    locked: 0
+  - name: Reticle
+    uniqueID: 1303103223
+    locked: 0
+  - name: Overlay
+    uniqueID: 1492108103
     locked: 0

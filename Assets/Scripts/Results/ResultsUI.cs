@@ -39,19 +39,19 @@ namespace RM_EM
             if (manager == null)
                 manager = ResultsManager.Instance;
 
-            // If the platform is set to webGL, disable the quit button.
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
-            {
-                titleButton.interactable = false; // Disable
+            //// If the platform is set to webGL, disable the quit button.
+            //if (Application.platform == RuntimePlatform.WebGLPlayer)
+            //{
+            //    titleButton.interactable = false; // Disable
                 
-            }
+            //}
 
-            // If the LOLSDK has been initialized.
-            if (GameSettings.InitializedLOLSDK)
-            {
-                // Turn off the title button.
-                titleButton.gameObject.SetActive(false);
-            }
+            //// If the LOLSDK has been initialized.
+            //if (GameSettings.InitializedLOLSDK)
+            //{
+            //    // Turn off the title button.
+            //    titleButton.gameObject.SetActive(false);
+            //}
         }
 
         // Applies the results data.

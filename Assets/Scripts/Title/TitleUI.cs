@@ -53,17 +53,20 @@ namespace RM_EM
                 quitButton.interactable = false; // Disable               
             }
 
-            // If the LOLSDK has been initialized.
-            if(GameSettings.InitializedLOLSDK)
-            {
-                quitButton.gameObject.SetActive(false); // Turn-Off
-            }
-            // If the LOLSDK isn't initialized, make the continue button non-interactable.
-            else if (!GameSettings.InitializedLOLSDK)
-            {
-                // Disable continue.
-                continueButton.interactable = false;
-            }
+            // Quit button should always be visibley
+            //// If the LOLSDK has been initialized.
+            //if(GameSettings.InitializedLOLSDK)
+            //{
+            //    quitButton.gameObject.SetActive(false); // Turn-Off
+            //}
+
+            // TODO: Continue button should always be active for now (fix later since it currently does the same as the start button).
+            // // If the LOLSDK isn't initialized, make the continue button non-interactable.
+            // else if (!GameSettings.InitializedLOLSDK)
+            // {
+            //     // Disable continue.
+            //     continueButton.interactable = false;
+            // }
 
             // Save the save text as the save feedback text.
             if(LOLManager.Instantiated)

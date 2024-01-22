@@ -75,20 +75,20 @@ namespace RM_EM
             // Checks what the player is.
             if (manager.p1 == playerMatch)
             {
-                // Translates the text to show the player header.
-                if (LOLManager.IsLOLSDKInitialized())
-                {
-                    headerText.text = "-" + LOLManager.Instance.GetLanguageText("kwd_player") + "-";
-                }
+                //// Translates the text to show the player header.
+                //if (LOLManager.IsLOLSDKInitialized())
+                //{
+                //    headerText.text = "-" + LOLManager.Instance.GetLanguageText("kwd_player") + "-";
+                //}
             }    
             // If player 2 is set.
             else if (manager.p2 == playerMatch)
             {
-                // Translates the text to show the player header.
-                if (LOLManager.IsLOLSDKInitialized())
-                {
-                    headerText.text = "-" + LOLManager.Instance.GetLanguageText("kwd_com") + "-";
-                }
+                //// Translates the text to show the player header.
+                //if (LOLManager.IsLOLSDKInitialized())
+                //{
+                //    headerText.text = "-" + LOLManager.Instance.GetLanguageText("kwd_com") + "-";
+                //}
 
                 // If player 2 is a computer player.
                 if (manager.p2 is ComputerMatch)

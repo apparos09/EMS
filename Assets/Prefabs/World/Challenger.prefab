@@ -124,6 +124,7 @@ MonoBehaviour:
   collider: {fileID: 5455840739512098616}
   spriteRenderer: {fileID: 964645638988108362}
   challengeSprite: {fileID: 21300000, guid: a2fc18d910db5134996945730b3de664, type: 3}
+  challengerColour: {r: 0.7009641, g: 0.08330365, b: 0.8490566, a: 1}
   challengerName: '-'
   nameKey: 
   challengerSpecies: 
@@ -153,7 +154,7 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2584869301959146280}
   m_Enabled: 1
-  m_SortingLayerID: 1265950517
+  m_SortingLayerID: 932073359
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0

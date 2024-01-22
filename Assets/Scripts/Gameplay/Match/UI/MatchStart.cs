@@ -66,7 +66,7 @@ namespace RM_EM
             string text = "";
 
             // Setting the text.
-            if(LOLManager.IsLOLSDKInitialized())
+            if(false)
             {
                 // The language key.
                 string key = "mth_ready";
@@ -97,7 +97,7 @@ namespace RM_EM
             string text = "";
 
             // Setting the text.
-            if (LOLManager.IsLOLSDKInitialized())
+            if (false)
             {
                 // The language key.
                 string key = "mth_start";
