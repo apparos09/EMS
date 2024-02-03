@@ -25,7 +25,7 @@ namespace RM_EM
 
 
             // The SDK is not initialized.
-            if (!LOLManager.IsLOLSDKInitialized())
+            if (!SystemManager.IsLOLSDKInitialized())
                 return;
 
             // TTS is not enabled.
@@ -33,7 +33,7 @@ namespace RM_EM
                 return;
 
             // Gets the instance.
-            LOLManager lolManager = LOLManager.Instance;
+            SystemManager lolManager = SystemManager.Instance;
 
             // Speak the text.
             lolManager.SpeakText(speakKey);

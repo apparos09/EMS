@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using util;
 
 namespace RM_EM
 {
@@ -57,12 +60,24 @@ namespace RM_EM
     // Used to save the game.
     public class SaveSystem : MonoBehaviour
     {
+        // The instance of Save System
+        private static SaveSystem instance;
+
+        // Becomes 'true' when the save system is initialized.
+        private bool initialized = false;
+
+        // If set to 'true', the game allows the player to save.
+        public bool allowSaveLoad = false; // False by default.
+
         // The game data.
         // The last game save. This is only for testing purposes.
         public EM_GameData lastSave;
 
         // The data that was loaded.
         public EM_GameData loadedData;
+
+        // The file reader.
+        public FileReaderBytes fileReader = null;
 
         // The world manager for the game, which has the save information.
         public WorldManager worldManager;
@@ -79,6 +94,32 @@ namespace RM_EM
         // The string key for the feedback.
         private const string FEEDBACK_STRING_KEY = "sve_msg_savingGame";
 
+        // Becomes 'true' when a save is in progress.
+        private bool saveInProgress = false;
+
+        // Private constructor so that only one save system object exists.
+        private SaveSystem()
+        {
+            // ...
+        }
+
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            // This is the instance.
+            if (instance == null)
+            {
+                instance = this;
+
+                // // Don't destroy the language manager on load.
+                // DontDestroyOnLoad(gameObject);
+            }
+
+            // Initializes the save system.
+            if (!initialized)
+                Initialize();
+        }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -93,11 +134,40 @@ namespace RM_EM
             //    feedbackString = defs[FEEDBACK_STRING_KEY];
         }
 
-        // Set save and load operations.
-        public void Initialize(Button newGameButton, Button continueButton)
+        // Checks if the save system has been initialized.
+        public bool Initialized
         {
-            // Makes the continue button disappear if there is no data to load. 
-            //Helper.StateButtonInitialize<EM_GameData>(newGameButton, continueButton, OnLoadData);
+            get { return initialized; }
+        }
+
+        // Set save and load operations.
+        public void Initialize()
+        {
+            // The result.
+            bool result;
+
+            // Creates the file reader with its file path and file.
+            fileReader = new FileReaderBytes();
+            fileReader.filePath = "Assets\\Resources\\Data\\";
+            fileReader.file = "save.dat";
+
+            // Checks if the file exists.
+            result = fileReader.FileExists();
+
+            // If the file exists, the save system checks if it's empty.
+            if (result)
+            {
+                // If the file is empty, delete the file.
+                bool empty = fileReader.IsFileEmpty();
+
+                // If empty, delete the file.
+                if (empty)
+                    fileReader.DeleteFile();
+
+            }
+
+            // Save system has been initialized.
+            initialized = true;
         }
 
         // Checks if the world manager has been set.
@@ -124,10 +194,57 @@ namespace RM_EM
         }
 
         // Clears out the last save and the loaded data object.
-        public void ClearLoadedAndLastSaveData()
+        public void ClearLoadedAndLastSaveData(bool deleteFile)
         {
             lastSave = null;
             loadedData = null;
+
+
+            // If the file should be deleted.
+            if (deleteFile)
+            {
+                // If the file exists, delete it.
+                if (fileReader.FileExists())
+                {
+                    // Checks if a meta file exists so that that can be deleted too.
+                    string meta = fileReader.GetFileWithPath() + ".meta";
+
+                    // Delete the main file.
+                    fileReader.DeleteFile();
+
+                    // If the meta file exists, delete it.
+                    if (File.Exists(meta))
+                        File.Delete(meta);
+                }
+            }
+        }
+
+        // Converts an object to bytes (requires seralizable object) and returns it.
+        static public byte[] SerializeObject(object data)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            bf.Serialize(ms, data); // Serialize the data for them emory stream.
+            return ms.ToArray();
+        }
+
+        // Deserialize the provided object, converting it to an object and returning it.
+        static public object DeserializeObject(byte[] data)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            ms.Write(data, 0, data.Length); // Write data.
+            ms.Seek(0, 0); // Return to start of data.
+
+            return bf.Deserialize(ms); // return content
+        }
+
+        // Checks if a save is in progress.
+        public bool IsSaveInProgress()
+        {
+            return saveInProgress;
         }
 
         // Saves data.

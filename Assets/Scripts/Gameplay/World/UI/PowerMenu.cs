@@ -228,9 +228,9 @@ namespace RM_EM
                 equipButton.interactable = false;
 
                 // Text-To-Speech
-                if (GameSettings.Instance.UseTextToSpeech && LOLManager.IsLOLSDKInitialized())
+                if (GameSettings.Instance.UseTextToSpeech && SystemManager.IsLOLSDKInitialized())
                 {
-                    LOLManager.Instance.SpeakText(speakKey);
+                    SystemManager.Instance.SpeakText(speakKey);
                 }
             }
             
@@ -387,10 +387,10 @@ namespace RM_EM
             }
 
             // If text-to-speech should be used.
-            if(GameSettings.Instance.UseTextToSpeech && LOLManager.IsLOLSDKInitialized())
+            if(GameSettings.Instance.UseTextToSpeech && SystemManager.IsLOLSDKInitialized())
             {
                 // Gets the manager.
-                LOLManager lolManager = LOLManager.Instance;
+                SystemManager lolManager = SystemManager.Instance;
 
                 // Speak the text.
                 lolManager.SpeakText(selectedEntry.descKey);

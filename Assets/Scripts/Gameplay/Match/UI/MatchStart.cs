@@ -72,13 +72,13 @@ namespace RM_EM
                 string key = "mth_ready";
 
                 // Sets the text.
-                text = LOLManager.Instance.GetLanguageText(key);
+                text = SystemManager.Instance.GetLanguageText(key);
 
                 // If TTS should be used.
                 if (GameSettings.Instance.UseTextToSpeech)
                 {
                     // Reads the key.
-                    LOLManager.Instance.SpeakText(key);
+                    SystemManager.Instance.SpeakText(key);
                 }
             }
             else
@@ -103,13 +103,13 @@ namespace RM_EM
                 string key = "mth_start";
 
                 // Sets the text.
-                text = LOLManager.Instance.GetLanguageText(key);
+                text = SystemManager.Instance.GetLanguageText(key);
 
                 // If TTS should be used.
                 if (GameSettings.Instance.UseTextToSpeech)
                 {
                     // Reads the key.
-                    LOLManager.Instance.SpeakText(key);
+                    SystemManager.Instance.SpeakText(key);
                 }
             }
             else

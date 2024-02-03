@@ -277,7 +277,7 @@ namespace RM_EM
             string speakKey = "";
 
             // If the LOLManager wasn't instantiated, then neither was
-            if (!LOLManager.IsLOLSDKInitialized())
+            if (!SystemManager.IsLOLSDKInitialized())
                 return "";
 
             switch (power)
@@ -369,7 +369,7 @@ namespace RM_EM
             string speakKey = "";
 
             // If the LOLManager wasn't instantiated, then neither was
-            if (!LOLManager.IsLOLSDKInitialized())
+            if (!SystemManager.IsLOLSDKInitialized())
                 return "";
 
 

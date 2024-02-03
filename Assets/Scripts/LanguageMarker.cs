@@ -95,9 +95,9 @@ namespace RM_EM
         public bool TranslateText(TMP_Text text, string key, bool markIfFailed)
         {
             // Checks if the SDK has been initialized. 
-            if(LOLManager.Instantiated)
+            if(SystemManager.Instantiated)
             {
-                text.text = LOLManager.Instance.GetLanguageText(key);
+                text.text = SystemManager.Instance.GetLanguageText(key);
                 return true;
             }
             else

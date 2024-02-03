@@ -28,7 +28,7 @@ namespace RM_EM
             // If the SDK is initialized.
             if (false)
             {
-                text.text = LOLManager.Instance.GetLanguageText(key);
+                text.text = SystemManager.Instance.GetLanguageText(key);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace RM_EM
             if (GameSettings.Instance.UseTextToSpeech && key != string.Empty)
             {
                 // Read out the text.
-                LOLManager.Instance.textToSpeech.SpeakText(key);
+                SystemManager.Instance.textToSpeech.SpeakText(key);
             }
         }
     }

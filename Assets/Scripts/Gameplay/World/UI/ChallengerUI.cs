@@ -112,8 +112,8 @@ namespace RM_EM
 
             // New
             // Gets the versus text.
-            string versus = LOLManager.IsLOLSDKInitialized() ?
-                LOLManager.Instance.GetLanguageText("kwd_versus") :
+            string versus = SystemManager.IsLOLSDKInitialized() ?
+                SystemManager.Instance.GetLanguageText("kwd_versus") :
                 "Vs.";
 
             // Gets the challenger name.
@@ -231,7 +231,7 @@ namespace RM_EM
                 if(ruleNames.Count == RULE_COUNT_MAX)
                 {
                     // Checks if the LOLSDK is initialized.
-                    if(LOLManager.IsLOLSDKInitialized())
+                    if(SystemManager.IsLOLSDKInitialized())
                     {
                         rules = "All";
                     }

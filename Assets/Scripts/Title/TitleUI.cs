@@ -69,8 +69,8 @@ namespace RM_EM
             // }
 
             // Save the save text as the save feedback text.
-            if(LOLManager.Instantiated)
-                LOLManager.Instance.saveSystem.feedbackText = saveText;
+            if(SystemManager.Instantiated)
+                SystemManager.Instance.saveSystem.feedbackText = saveText;
         }
 
         // Starts the new game.
@@ -178,13 +178,13 @@ namespace RM_EM
         public void SpeakText(string key)
         {
             // Checks if the instances exist.
-            if(GameSettings.Instantiated && LOLManager.Instantiated)
+            if(GameSettings.Instantiated && SystemManager.Instantiated)
             {
                 // Checks if TTS should be used.
                 if(GameSettings.Instance.UseTextToSpeech)
                 {
                     // Grabs the LOL Manager to trigger text-to-speech.
-                    LOLManager lolManager = LOLManager.Instance;
+                    SystemManager lolManager = SystemManager.Instance;
                     lolManager.textToSpeech.SpeakText(key);
                 }
             }

@@ -305,7 +305,7 @@ namespace RM_EM
             if(GameSettings.Instance.UseTextToSpeech)
             {
                 // The LOL Manager
-                LOLManager lolManager = LOLManager.Instance;
+                SystemManager lolManager = SystemManager.Instance;
 
                 // If there is a description key, read it.
                 if (entry.descKey != "")

@@ -69,10 +69,10 @@ namespace RM_EM
                 worldManager = WorldManager.Instance;
 
             // If the LOL manager exists.
-            if (LOLManager.Instantiated)
+            if (SystemManager.Instantiated)
             {
                 // Sets the save text.
-                LOLManager.Instance.saveSystem.feedbackText = saveText;
+                SystemManager.Instance.saveSystem.feedbackText = saveText;
             }
         }
 

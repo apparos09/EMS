@@ -170,10 +170,10 @@ namespace RM_EM
             //bool useTutorial = true;
 
             // If the LOL Manager has been instantiated.
-            if (LOLManager.Instantiated)
+            if (SystemManager.Instantiated)
             {
                 // Grabs the manager.
-                LOLManager lolManager = LOLManager.Instance;
+                SystemManager lolManager = SystemManager.Instance;
 
                 // Checks for loaded data.
                 if (lolManager.saveSystem.HasLoadedData())
@@ -669,14 +669,14 @@ namespace RM_EM
         public bool SaveGame()
         {
             // If the LOL Manager does not exist, return false.
-            if (!LOLManager.Instantiated)
+            if (!SystemManager.Instantiated)
             {
                 Debug.LogError("The LOL Manager does not exist.");
                 return false;
             }
 
             // Gets the save system.
-            SaveSystem saveSys = LOLManager.Instance.saveSystem;
+            SaveSystem saveSys = SystemManager.Instance.saveSystem;
 
             // Checks if the save system exists.
             if (saveSys == null)
@@ -701,14 +701,14 @@ namespace RM_EM
         public bool LoadGame()
         {
             // If the LOL Manager does not exist, return false.
-            if(!LOLManager.Instantiated)
+            if(!SystemManager.Instantiated)
             {
                 Debug.LogError("The LOL Manager does not exist.");
                 return false;
             }
 
             // Gets the save system.
-            SaveSystem saveSys = LOLManager.Instance.saveSystem;
+            SaveSystem saveSys = SystemManager.Instance.saveSystem;
 
             // Checks if the save system exists.
             if(saveSys == null)
@@ -834,15 +834,15 @@ namespace RM_EM
         public void SubmitProgress()
         {
             // If the LOLManager is instantiated.
-            if (LOLManager.Instantiated)
-                LOLManager.Instance.SubmitProgress(gameScore, GetGameProgress());
+            if (SystemManager.Instantiated)
+                SystemManager.Instance.SubmitProgress(gameScore, GetGameProgress());
         }
 
         // Submits the game progress complete.
         public void SubmitProgressComplete()
         {
-            if (LOLManager.Instantiated)
-                LOLManager.Instance.SubmitProgressComplete(gameScore);
+            if (SystemManager.Instantiated)
+                SystemManager.Instance.SubmitProgressComplete(gameScore);
         }
 
 

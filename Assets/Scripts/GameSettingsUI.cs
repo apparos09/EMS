@@ -133,7 +133,7 @@ namespace RM_EM
 
             // Stops the text-to-speech if it was just turned off.
             if (!gameSettings.UseTextToSpeech)
-                LOLManager.Instance.textToSpeech.StopSpeakText();
+                SystemManager.Instance.textToSpeech.StopSpeakText();
         }
 
         // On the tutorial changes.

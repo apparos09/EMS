@@ -56,7 +56,7 @@ namespace RM_EM
                 GameSettings settings = GameSettings.Instance;
 
                 // Gets an instance of the LOL manager.
-                LOLManager lolManager = LOLManager.Instance;
+                SystemManager lolManager = SystemManager.Instance;
 
                 // Checks for initialization
                 if (false)
@@ -66,9 +66,9 @@ namespace RM_EM
                     // As such, the Update loop keeps them both on.
 
 
-                    // Set up the game initializations.
-                    if (titleUI.newGameButton != null && titleUI.continueButton != null)
-                        lolManager.saveSystem.Initialize(titleUI.newGameButton, titleUI.continueButton);
+                    //// Set up the game initializations.
+                    //if (titleUI.newGameButton != null && titleUI.continueButton != null)
+                    //    lolManager.saveSystem.Initialize(titleUI.newGameButton, titleUI.continueButton);
 
                     // Don't disable the continue button, otherwise the save data can't be loaded.
                     // Enables/disables the continue button based on if there is loaded data or not.
@@ -305,7 +305,7 @@ namespace RM_EM
         public void StartNewGame()
         {
             // Clear out the loaded data and last save if the LOLSDK has been initialized.
-            LOLManager.Instance.saveSystem.ClearLoadedAndLastSaveData();
+            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData(false);
 
             // Start the game.
             StartGame();
@@ -332,8 +332,8 @@ namespace RM_EM
         // TODO: This is only for testing, and the button for this should not be shown in the final game.
         public void ClearSave()
         {
-            LOLManager.Instance.saveSystem.lastSave = null;
-            LOLManager.Instance.saveSystem.loadedData = null;
+            SystemManager.Instance.saveSystem.lastSave = null;
+            SystemManager.Instance.saveSystem.loadedData = null;
 
             titleUI.continueButton.interactable = false;
         }

@@ -76,12 +76,12 @@ namespace RM_EM
 
 
             // If text-to-speech is active and available.
-            if(GameSettings.Instance.UseTextToSpeech && LOLManager.IsLOLSDKInitialized())
+            if(GameSettings.Instance.UseTextToSpeech && SystemManager.IsLOLSDKInitialized())
             {
                 // Speak the text.
                 // If the tutorial text box is open, this doesn't happen since it overrides the text box TTS.
                 if(!matchManager.IsTutorialTextBoxOpen())
-                    LOLManager.Instance.SpeakText(langKey);
+                    SystemManager.Instance.SpeakText(langKey);
             }
         }
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace RM_EM
 {
-    // a class for the LOL
-    public class LOLManager : MonoBehaviour
+    // A manager for the system (formally LOLManager)
+    public class SystemManager : MonoBehaviour
     {
         // the instance of the LOL manager.
-        private static LOLManager instance;
+        private static SystemManager instance;
 
         // Gets set to 'true' when the singleton has been instanced.
         // This isn't needed, but it helps with the clarity.
@@ -25,7 +25,7 @@ namespace RM_EM
         const int MAX_PROGRESS = WorldManager.CHALLENGER_COUNT; // same as room count.
 
         // private constructor so that only one accessibility object exists.
-        private LOLManager()
+        private SystemManager()
         {
             // ...
         }
@@ -90,7 +90,7 @@ namespace RM_EM
         // }
 
         // Returns the instance of the accessibility.
-        public static LOLManager Instance
+        public static SystemManager Instance
         {
             get
             {
@@ -101,7 +101,7 @@ namespace RM_EM
                     GameObject go = new GameObject("LOL Manager");
 
                     // Adds the instance component to the new object.
-                    instance = go.AddComponent<LOLManager>();
+                    instance = go.AddComponent<SystemManager>();
                 }
 
                 // returns the instance.
