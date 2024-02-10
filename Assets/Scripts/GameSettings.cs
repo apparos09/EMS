@@ -253,6 +253,33 @@ namespace RM_EM
             }
         }
 
+
+        // Full Screen
+        public bool FullScreen
+        {
+            get
+            {
+                return Screen.fullScreen;
+            }
+
+            set
+            {
+                // Checks the value.
+                switch(value)
+                {
+                    case true: // Making full screen
+                        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                        break;
+
+                    case false: // Making windowed (1024 x 576)
+                        Screen.fullScreenMode = FullScreenMode.Windowed;
+                        break;
+                }
+                
+                Screen.fullScreen = value;
+            }
+        }
+
         // adjusts the audio source that's supplied through this function.
         // for this to work, it needs to have a usable tag and set source audio object.
         public void AdjustAudio(AudioSourceControl audio)

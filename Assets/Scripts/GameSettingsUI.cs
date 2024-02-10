@@ -39,6 +39,9 @@ namespace RM_EM
         // the tutorial toggle.
         public Toggle tutorialToggle;
 
+        // the full screen toggle
+        public Toggle fullScreenToggle;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -140,6 +143,12 @@ namespace RM_EM
         public void OnTutorialChange(Toggle toggle)
         {
             gameSettings.UseTutorial = toggle.isOn;
+        }
+
+        // When the full screen is changed.
+        public void OnFullScreenChange(Toggle toggle)
+        {
+            gameSettings.FullScreen = toggle.isOn;
         }
 
         // On the bgm volume change.
