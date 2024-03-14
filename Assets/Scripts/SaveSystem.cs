@@ -67,7 +67,7 @@ namespace RM_EM
         private bool initialized = false;
 
         // If set to 'true', the game allows the player to save.
-        public bool allowSaveLoad = false; // False by default.
+        public bool allowSaveLoad = true; // False by default.
 
         // The game data.
         // The last game save. This is only for testing purposes.
@@ -146,8 +146,17 @@ namespace RM_EM
             // The result.
             bool result;
 
-            // Creates the file reader with its file path and file.
-            fileReader = new FileReaderBytes();
+            // Checks if the file reader exists.
+            if(fileReader == null)
+            {
+                // Tries to grab component.
+                if(!TryGetComponent<FileReaderBytes>(out fileReader))
+                {
+                    // Add component.
+                    fileReader = gameObject.AddComponent<FileReaderBytes>();
+                }
+            }
+
             fileReader.filePath = "Assets\\Resources\\Data\\";
             fileReader.file = "save.dat";
 
@@ -248,7 +257,7 @@ namespace RM_EM
         }
 
         // Saves data.
-        public bool SaveGame()
+        public bool SaveGame(bool async)
         {
             // The game manager does not exist if false.
             if (!IsWorldManagerSet())
@@ -260,82 +269,270 @@ namespace RM_EM
             // Determines if saving wa a success.
             bool success = false;
 
-            //// Generates the save data.
-            //EM_GameData savedData = worldManager.GenerateSaveData();
+            // Generates the save data.
+            EM_GameData savedData = worldManager.GenerateSaveData();
 
-            //// Stores the most recent save.
-            //lastSave = savedData;
+            // Stores the most recent save.
+            lastSave = savedData;
 
-            //// If the instance has been initialized.
-            //if (LOLSDK.Instance.IsInitialized)
-            //{
-            //    // Makes sure that the feedback string is set.
-            //    if (FEEDBACK_STRING_KEY != string.Empty)
-            //    {
-            //        // Gets the language definition.
-            //        JSONNode defs = SharedState.LanguageDefs;
+            // OLD
+            // // If the instance has been initialized.
+            // if (LOLSDK.Instance.IsInitialized)
+            // {
+            //     // Makes sure that the feedback string is set.
+            //     if (FEEDBACK_STRING_KEY != string.Empty)
+            //     {
+            //         // Gets the language definition.
+            //         JSONNode defs = SharedState.LanguageDefs;
+            // 
+            //         // Sets the feedback string if it wasn't already set.
+            //         if (feedbackString != defs[FEEDBACK_STRING_KEY])
+            //             feedbackString = defs[FEEDBACK_STRING_KEY];
+            //     }
+            // 
+            // 
+            //     // Send the save state.
+            //     LOLSDK.Instance.SaveState(savedData);
+            //     success = true;
+            // }
+            // else // Not initialized.
+            // {
+            //     Debug.LogError("The SDK has not been initialized. Improper save made.");
+            //     success = false;
+            // }
 
-            //        // Sets the feedback string if it wasn't already set.
-            //        if (feedbackString != defs[FEEDBACK_STRING_KEY])
-            //            feedbackString = defs[FEEDBACK_STRING_KEY];
-            //    }
+
+            // NEW
+            // If the instance has been initialized.
+            if (SystemManager.Instantiated)
+            {
+                // feedbackString = "Saving Data";
 
 
-            //    // Send the save state.
-            //    LOLSDK.Instance.SaveState(savedData);
-            //    success = true;
-            //}
-            //else // Not initialized.
-            //{
-            //    Debug.LogError("The SDK has not been initialized. Improper save made.");
-            //    success = false;
-            //}
+
+                success = true;
+            }
+            else // Not initialized.
+            {
+                Debug.LogError("Save failed.");
+                success = false;
+            }
+
+            // Checks if save/load should be allowed.
+            if (allowSaveLoad)
+            {
+                // Save to a file.
+                if (async) // Asynchronous save.
+                {
+                    success = SaveToFileAsync(savedData);
+                }
+                else // Synchronous save.
+                {
+                    success = SaveToFile(savedData);
+                }
+            }
+            else
+            {
+                success = false;
+            }
 
             return success;
         }
 
-        // Called for saving the result.
-        private void OnSaveResult(bool success)
+        // Save the information to a file.
+        private bool SaveToFile(EM_GameData data)
         {
-            if (!success)
-            {
-                Debug.LogWarning("Saving not successful");
-                return;
-            }
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
 
-            if (feedbackMethod != null)
-                StopCoroutine(feedbackMethod);
+            // Will generate the file if it doesn't exist.
+            // // Checks that the file exists.
+            // if (!fileReader.FileExists())
+            //     return false;
 
+            // Seralize the data.
+            byte[] dataArr = SerializeObject(data);
 
+            // Data did not serialize properly.
+            if (dataArr.Length == 0)
+                return false;
 
-            // ...Auto Saving Complete
-            feedbackMethod = StartCoroutine(Feedback(feedbackString));
+            // Save started.
+            saveInProgress = true;
+
+            // Write to the file.
+            File.WriteAllBytes(file, dataArr);
+
+            // Save finished.
+            saveInProgress = false;
+
+            // Data written successfully.
+            return true;
         }
 
-        // Feedback while result is saving.
-        IEnumerator Feedback(string text)
+        // Saves the game asynchronously.
+        public bool SaveToFileAsync(EM_GameData data)
         {
-            // Only updates the text that the feedback text was set.
+            // Checks if the feedback method exists.
+            if (feedbackMethod == null)
+            {
+                feedbackMethod = StartCoroutine(SaveToFileAsyncCourtine(data));
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning("Save already in progress.");
+                return false;
+            }
+        }
+
+        // Refreshes the feedback string.
+        public void RefreshFeedbackString()
+        {
+            //// The language manager.
+            //LanguageManager lm = LanguageManager.Instance;
+
+            //// If the language should be translated.
+            //if (lm.TranslateAndLanguageSet())
+            //{
+            //    feedbackString = LanguageManager.Instance.GetLanguageText(FEEDBACK_STRING_KEY);
+            //}
+            //else
+            //{
+            //    feedbackString = "Saving Game...";
+            //}
+
+            feedbackString = "Saving Data";
+        }
+
+        // Refreshes the feedback text.
+        public void RefreshFeedbackText()
+        {
+            // If the text exists.
             if (feedbackText != null)
             {
-                feedbackText.text = text;
-                feedbackText.gameObject.SetActive(true);
+                // Checks if a save is in progress.
+                if (saveInProgress)
+                    feedbackText.text = feedbackString;
+                else
+                    feedbackText.text = string.Empty;
             }
-                
+        }
 
+        // Save the information to a file asynchronously (cannot return anything).
+        private IEnumerator SaveToFileAsyncCourtine(EM_GameData data)
+        {
+            // Save started.
+            saveInProgress = true;
+
+            // Show saving text.
+            RefreshFeedbackText();
+
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
+
+            // Seralize the data.
+            byte[] dataArr = SerializeObject(data);
+
+            // Yield return before file wrting begins.
+            yield return null;
+
+            // Show saving text in case scene has changed.
+            RefreshFeedbackText();
+
+            // Opens the file in the file stream.
+            FileStream fs = File.OpenWrite(file);
+
+            // NOTE: this is pretty scuffed, but because of the way it's set up I don't really have a better option.
+            // File.WriteAsync would probably be better.
+
+            // Ver. 1
+            // // The number of bytes to write, and the offset.
+            // int count = 32;
+            // int offset = 0;
+
+            // // While there's still bytes to write.
+            // while(offset < dataArr.Length)
+            // {
+            //     // If the count exceeds the amount of remaining bytes, adjust it.
+            //     if (offset + count > dataArr.Length)
+            //         count = dataArr.Length - offset;
+            // 
+            //     fs.Write(dataArr, offset, count);
+            // 
+            //     // Increase the offset.
+            //     offset += count;
+            // 
+            //     // Run other operations.
+            //     // yield return null;
+            // 
+            //     // Pause the courtine for 2 seconds.
+            //     yield return feedbackTimer;
+            // }
+
+            // Ver. 2 - write the data and suspend for the amount of time set to feedbackTimer.
+            fs.Write(dataArr, 0, dataArr.Length);
             yield return feedbackTimer;
 
-            // Only updates the content if the feedback text has been set.
-            if (feedbackText != null)
-            {
-                feedbackText.text = string.Empty;
-                feedbackText.gameObject.SetActive(false);
-            }
-                
+            // Show saving text in case scene has changed.
+            RefreshFeedbackText();
 
-            // nullifies the feedback method.
-            feedbackMethod = null;
+            // Close the file stream.
+            fs.Close();
+
+            // Save finished.
+            saveInProgress = false;
+
+            // Hide feedback text now that the save is done.
+            RefreshFeedbackText();
+
+            // Save is complete, so set the method to null.
+            if (feedbackMethod != null)
+                feedbackMethod = null;
         }
+
+        //// Called for saving the result.
+        //private void OnSaveResult(bool success)
+        //{
+        //    if (!success)
+        //    {
+        //        Debug.LogWarning("Saving not successful");
+        //        return;
+        //    }
+
+        //    if (feedbackMethod != null)
+        //        StopCoroutine(feedbackMethod);
+
+
+
+        //    // ...Auto Saving Complete
+        //    feedbackMethod = StartCoroutine(Feedback(feedbackString));
+        //}
+
+        //// Feedback while result is saving.
+        //IEnumerator Feedback(string text)
+        //{
+        //    // Only updates the text that the feedback text was set.
+        //    if (feedbackText != null)
+        //    {
+        //        feedbackText.text = text;
+        //        feedbackText.gameObject.SetActive(true);
+        //    }
+
+
+        //    yield return feedbackTimer;
+
+        //    // Only updates the content if the feedback text has been set.
+        //    if (feedbackText != null)
+        //    {
+        //        feedbackText.text = string.Empty;
+        //        feedbackText.gameObject.SetActive(false);
+        //    }
+
+
+        //    // nullifies the feedback method.
+        //    feedbackMethod = null;
+        //}
 
         // Checks if the game has loaded data.
         public bool HasLoadedData()

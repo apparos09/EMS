@@ -319,6 +319,15 @@ namespace RM_EM
             // Since that might happen after this function is processed...
             // Loaded data does not need to be checked for at this stage.
 
+
+            // TODO: load data.
+            // // If the system manager has been instantiated.
+            // if(SystemManager.Instantiated)
+            // {
+            //     if(SystemManager.Instance.saveSystem.HasLoadedData())
+            //         SystemManager.Instance.saveSystem.Load
+            // }
+
             //// If the user's tutorial settings should be overwritten, do so.
             //if (overrideTutorial)
             //    GameSettings.Instance.UseTutorial = continueTutorial;

@@ -104,6 +104,10 @@ namespace RM_EM
                 // Enable the TTS volume slider and TTS toggle.
                 ttsVolumeSlider.interactable = true;
                 textToSpeechToggle.interactable = true;
+
+                // Sets interactable to false for the full-screen toggle and disables it.
+                fullScreenToggle.interactable = false;
+                fullScreenToggle.gameObject.SetActive(false);
             }
             else
             {
@@ -113,6 +117,17 @@ namespace RM_EM
                 // Disable the TTS volume slider and toggle.
                 ttsVolumeSlider.interactable = false;
                 textToSpeechToggle.interactable = false;
+
+
+                // Checks if the full-screen toggle should be active.
+                if(Application.platform == RuntimePlatform.WebGLPlayer)
+                {
+                    fullScreenToggle.interactable = false;
+                }
+                else
+                {
+                    fullScreenToggle.interactable = true;
+                }
             }
 
         }

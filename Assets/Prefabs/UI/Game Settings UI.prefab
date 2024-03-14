@@ -173,8 +173,8 @@ RectTransform:
   - {fileID: 2598921705605364473}
   - {fileID: 1135538131324480955}
   - {fileID: 170464532587199264}
-  - {fileID: 4641607184849547592}
   - {fileID: 5768756208063190704}
+  - {fileID: 4641607184849547592}
   - {fileID: 8371542465905406793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -202,7 +202,7 @@ MonoBehaviour:
   muteToggle: {fileID: 7796526845583641859}
   textToSpeechToggle: {fileID: 7038407856078936984}
   tutorialToggle: {fileID: 2565542251913892336}
-  fullScreenToggle: {fileID: 0}
+  fullScreenToggle: {fileID: 3746523219803338248}
 --- !u!1 &6013503582317944831
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TTS Toggle (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 4256868661264123158, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5140021477235573465, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -862,7 +866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2640772381346341473, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 2640772381346341473, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1120,7 +1124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8826048291581233503, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8826048291581233503, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1224,6 +1228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TTS Slider
       objectReference: {fileID: 0}
+    - target: {fileID: 931507238347783582, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2495669884176842231, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1262,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5109254343742318633, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7889980868333896582, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1270,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515023603655746792, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8826048291581233503, guid: 3893701f7ce1e754ea2d38f22d9ba59a, type: 3}
       propertyPath: m_Pivot.x
@@ -1726,7 +1734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2640772381346341473, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -130
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 2640772381346341473, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1928,11 +1936,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2640772381346341473, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 140
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2640772381346341473, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -130
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 2640772381346341473, guid: 9bb3dfe148a7a1e49b1f3362a2107ed3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

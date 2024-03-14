@@ -691,7 +691,7 @@ namespace RM_EM
                 saveSys.worldManager = this;
 
             // Saves the game.
-            bool result = saveSys.SaveGame();
+            bool result = saveSys.SaveGame(true);
 
             // Return result.
             return result;
