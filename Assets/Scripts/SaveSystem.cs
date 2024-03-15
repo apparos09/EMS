@@ -88,6 +88,9 @@ namespace RM_EM
         Coroutine feedbackMethod;
         public TMP_Text feedbackText;
 
+        // The default saving data.
+        private string FEEDBACK_STRING_DEFAULT = "Saving Data";
+
         // The string shown when having feedback.
         private string feedbackString = "Saving Data";
 
@@ -402,7 +405,7 @@ namespace RM_EM
             //    feedbackString = "Saving Game...";
             //}
 
-            feedbackString = "Saving Data";
+            feedbackString = FEEDBACK_STRING_DEFAULT;
         }
 
         // Refreshes the feedback text.
@@ -491,49 +494,6 @@ namespace RM_EM
                 feedbackMethod = null;
         }
 
-        //// Called for saving the result.
-        //private void OnSaveResult(bool success)
-        //{
-        //    if (!success)
-        //    {
-        //        Debug.LogWarning("Saving not successful");
-        //        return;
-        //    }
-
-        //    if (feedbackMethod != null)
-        //        StopCoroutine(feedbackMethod);
-
-
-
-        //    // ...Auto Saving Complete
-        //    feedbackMethod = StartCoroutine(Feedback(feedbackString));
-        //}
-
-        //// Feedback while result is saving.
-        //IEnumerator Feedback(string text)
-        //{
-        //    // Only updates the text that the feedback text was set.
-        //    if (feedbackText != null)
-        //    {
-        //        feedbackText.text = text;
-        //        feedbackText.gameObject.SetActive(true);
-        //    }
-
-
-        //    yield return feedbackTimer;
-
-        //    // Only updates the content if the feedback text has been set.
-        //    if (feedbackText != null)
-        //    {
-        //        feedbackText.text = string.Empty;
-        //        feedbackText.gameObject.SetActive(false);
-        //    }
-
-
-        //    // nullifies the feedback method.
-        //    feedbackMethod = null;
-        //}
-
         // Checks if the game has loaded data.
         public bool HasLoadedData()
         {
@@ -563,50 +523,56 @@ namespace RM_EM
         }
 
         // The gameplay manager now checks if there is loadedData. If so, then it will load in the data when the game starts.
-        // // Loads a saved game. This returns 'false' if there was no data.
-        // public bool LoadGame()
-        // {
-        //     // No loaded data.
-        //     if(loadedData == null)
-        //     {
-        //         Debug.LogWarning("There is no saved game.");
-        //         return false;
-        //     }
-        // 
-        //     // TODO: load the game data.
-        // 
-        //     return true;
-        // }
-
-        // Called to load data from the server.
-        private void OnLoadData(EM_GameData loadedGameData)
+        // Loads a saved game. This returns 'false' if there was no data.
+        public bool LoadGame()
         {
-            // Overrides serialized state data or continues with editor serialized values.
-            if (loadedGameData != null)
+            // Loading a save is not allowed.
+            if (!allowSaveLoad)
+                return false;
+
+            // The result of loading the save data.
+            bool success;
+
+            // The file doesn't exist.
+            if (!fileReader.FileExists())
             {
-                loadedData = loadedGameData;
-            }
-            else // No game data found.
-            {
-                // Changed from error to warning since starting a new game always triggers this.
-                // Debug.LogError("No game data found.");
-                Debug.Log("No game data found.");
-                loadedData = null;
-                return;
+                return false;
             }
 
-            // TODO: save data for game loading.
-            // TODO: why do I check this here? What purpose does this serve.
-            //if (!IsWorldManagerSet())
-            //{
-            //    Debug.LogError("Game gameManager not found.");
-            //    return;
-            //}
+            // Loads the file.
+            loadedData = LoadFromFile();
 
-            // TODO: this automatically loads the game if the continue button is pressed.
-            // If there is no data to load, the button is gone. 
-            // You should move the buttons around to accomidate for this.
-            // LoadGame();
+            // The data has been loaded successfully.
+            success = loadedData != null;
+
+            return success;
+        }
+
+        // Loads information from a file.
+        private EM_GameData LoadFromFile()
+        {
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
+
+            // Checks that the file exists.
+            if (!fileReader.FileExists())
+                return null;
+
+            // Read from the file.
+            byte[] dataArr = File.ReadAllBytes(file);
+
+            // Data did not serialize properly.
+            if (dataArr.Length == 0)
+                return null;
+
+            // Deseralize the data.
+            object data = DeserializeObject(dataArr);
+
+            // Convert to loaded data.
+            EM_GameData loadData = (EM_GameData)(data);
+
+            // Return loaded data.
+            return loadData;
         }
 
 

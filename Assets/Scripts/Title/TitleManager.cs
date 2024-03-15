@@ -55,9 +55,6 @@ namespace RM_EM
                 // Checks if LOL SDK has been initialized.
                 GameSettings settings = GameSettings.Instance;
 
-                // Gets an instance of the LOL manager.
-                SystemManager lolManager = SystemManager.Instance;
-
                 // Checks for initialization
                 if (false)
                 {
@@ -86,17 +83,32 @@ namespace RM_EM
                 }
                 else
                 {
-                    Debug.LogError("LOL SDK NOT INITIALIZED.");
+                    // Debug.LogError("LOL SDK NOT INITIALIZED.");
 
-                    // You can save and go back to the menu, so the continue button is usable under that circumstance.
-                    if (lolManager.saveSystem.HasLoadedData()) // Game has loaded data.
+                    // Chcks if the system manager has been instantiated.
+                    if(SystemManager.Instantiated)
                     {
-                        // TODO: manage tutorial content.
+                        // Gets an instance of the LOL manager.
+                        SystemManager sysManager = SystemManager.Instance;
+
+                        // Loads the game.
+                        sysManager.saveSystem.LoadGame();
+
+                        // Changes continue button based on if there's loaded data or not.
+                        // You can save and go back to the menu, so the continue button is usable under that circumstance.
+                        if (sysManager.saveSystem.HasLoadedData()) // Game has loaded data.
+                        {
+                            // TODO: manage tutorial content.
+                            titleUI.continueButton.interactable = true;
+                        }
+                        else // No loaded data.
+                        {
+                            // TODO: manage tutorial content.
+                            titleUI.continueButton.interactable = false;
+                        }
                     }
-                    else // No loaded data.
-                    {
-                        // TODO: manage tutorial content.
-                    }
+
+                    
 
                     // TODO: do you need this?
                     // // Have the button be turned on no matter what for testing purposes.
@@ -305,7 +317,8 @@ namespace RM_EM
         public void StartNewGame()
         {
             // Clear out the loaded data and last save if the LOLSDK has been initialized.
-            SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData(false);
+            if(SystemManager.Instantiated)
+                SystemManager.Instance.saveSystem.ClearLoadedAndLastSaveData(false);
 
             // Start the game.
             StartGame();
