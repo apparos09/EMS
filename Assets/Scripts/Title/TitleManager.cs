@@ -108,11 +108,20 @@ namespace RM_EM
                         }
                     }
 
-                    
 
                     // TODO: do you need this?
                     // // Have the button be turned on no matter what for testing purposes.
                     // titleUI.continueButton.interactable = true;
+
+
+                    // Moved to the TitleUI script.
+                    // // If the game is running on the WebGL platform...
+                    // if (Application.platform == RuntimePlatform.WebGLPlayer)
+                    // {
+                    //     // Disable the continue button.
+                    //     titleUI.continueButton.interactable = false;
+                    // }
+                        
 
                     // Adjust the audio settings since the InitScene was not used.
                     settings.AdjustAllAudioLevels();

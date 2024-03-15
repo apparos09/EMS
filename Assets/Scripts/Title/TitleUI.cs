@@ -49,7 +49,10 @@ namespace RM_EM
             // If the platform is set to webGL, disable the quit button.
             if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
-                // TODO: should I take this out?
+                // Disable the continue button.
+                continueButton.interactable = false;
+
+                // Disable the quit button.
                 quitButton.interactable = false; // Disable               
             }
 
