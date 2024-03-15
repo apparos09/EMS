@@ -1225,6 +1225,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 962962872225166163, guid: f040a37b3ca0cd24daad1b02ffaa2d7e, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 703993266}
     - target: {fileID: 1336521036115586046, guid: f040a37b3ca0cd24daad1b02ffaa2d7e, type: 3}
       propertyPath: playerMatch
       value: 

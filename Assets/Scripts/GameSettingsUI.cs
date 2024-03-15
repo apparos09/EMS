@@ -91,6 +91,10 @@ namespace RM_EM
             // });
 
 
+            // Sets the toggle based on the current full screen settings.
+            fullScreenToggle.isOn = Screen.fullScreen;
+
+
             // If the SDK isn't initialized, some functions may be unavailable.
             // NOTE: the 'interactable' component of the tutorial toggle isn't changed because...
             // The toggle can only be interacted with on the title screen. It's non-interactable otherwise.
@@ -120,6 +124,8 @@ namespace RM_EM
 
 
                 // Checks if the full-screen toggle should be active.
+                // It shouldn't be active if the game is being played through the web browser...
+                // As the full-screen option is handled differently.
                 if(Application.platform == RuntimePlatform.WebGLPlayer)
                 {
                     fullScreenToggle.interactable = false;
