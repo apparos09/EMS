@@ -5,8 +5,10 @@ using UnityEngine;
 namespace RM_EM
 {
     // The results audio.
-    public class ResultsAudio : MonoBehaviour
+    public class ResultsAudio : EM_GameAudio
     {
+        [Header("ResultsAudio")]
+
         // Manager
         public ResultsManager manager;
 
@@ -17,8 +19,10 @@ namespace RM_EM
         public AudioSource sfxSource;
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
+            base.Start();
+
             if (manager == null)
                 manager = ResultsManager.Instance;
         }

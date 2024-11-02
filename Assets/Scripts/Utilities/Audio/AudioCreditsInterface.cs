@@ -17,8 +17,8 @@ namespace util
         // The user interface for the credits menu.
         [Header("UI")]
 
-        // The name of the song.
-        public TMP_Text songTitleText;
+        // The name of the audio.
+        public TMP_Text audioTitleText;
 
         // The name of the artist.
         public TMP_Text artistText;
@@ -38,8 +38,8 @@ namespace util
         // The text for the copyright information.
         public TMP_Text copyrightText;
 
-        // The page number text, which is a fraction (000/000)
-        public TMP_Text pageNumberText;
+        // The credit number text, which is a fraction (000/000)
+        public TMP_Text creditNumberText;
 
 
 
@@ -62,8 +62,14 @@ namespace util
             UpdateCredit();
         }
 
-        // Sets the index of the page.
-        public void SetPageIndex(int newIndex)
+        // Returns the credit index.
+        public int GetCurrentCreditIndex()
+        {
+            return creditIndex;
+        }
+
+        // Sets the index of the credit.
+        public void SetCreditIndex(int newIndex)
         {
             // The reference count.
             int refCount = audioCredits.GetCreditCount();
@@ -82,8 +88,18 @@ namespace util
             UpdateCredit();
         }
 
-        // Goes to the previous page.
-        public void PreviousPage()
+        // Gets the current credit.
+        public AudioCredits.AudioCredit GetCurrentCredit()
+        {
+            // Gets the current credit.
+            AudioCredits.AudioCredit credit = audioCredits.audioCredits[creditIndex];
+
+            // Returns the credit.
+            return credit;
+        }
+
+        // Goes to the previous credit.
+        public void PreviousCredit()
         {
             // Generates the new index.
             int newIndex = creditIndex - 1;
@@ -92,11 +108,11 @@ namespace util
             if (!audioCredits.IndexInBounds(newIndex))
                 newIndex = audioCredits.GetCreditCount() - 1;
 
-            SetPageIndex(newIndex);
+            SetCreditIndex(newIndex);
         }
 
-        // Goes to the next page.
-        public void NextPage()
+        // Goes to the next credit.
+        public void NextCredit()
         {
             // Generates the new index.
             int newIndex = creditIndex + 1;
@@ -105,15 +121,15 @@ namespace util
             if (!audioCredits.IndexInBounds(newIndex))
                 newIndex = 0;
 
-            SetPageIndex(newIndex);
+            SetCreditIndex(newIndex);
         }
 
-        // Sets the page number text.
-        public virtual void UpdatePageNumberText()
+        // Sets the credit number text.
+        public virtual void UpdateCreditNumberText()
         {
             // Updates the page number.
-            if(pageNumberText != null)
-                pageNumberText.text = (creditIndex + 1).ToString() + "/" + audioCredits.GetCreditCount().ToString();
+            if(creditNumberText != null)
+                creditNumberText.text = (creditIndex + 1).ToString() + "/" + audioCredits.GetCreditCount().ToString();
         }
 
         // Updates the credit.
@@ -130,8 +146,8 @@ namespace util
 
             // Updates all of the information.
             // Song Title - the song's name.
-            if(songTitleText != null)
-                songTitleText.text = credit.title;
+            if(audioTitleText != null)
+                audioTitleText.text = credit.title;
 
             // Artists - the artist(s) responsible for the audio.
             if(artistText != null)
@@ -158,7 +174,7 @@ namespace util
                 copyrightText.text = credit.copyright;
 
             // Updates the page number.
-            UpdatePageNumberText();
+            UpdateCreditNumberText();
         }
     }
 }

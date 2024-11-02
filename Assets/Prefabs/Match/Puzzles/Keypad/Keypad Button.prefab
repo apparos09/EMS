@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3144168567753178403}
   - component: {fileID: 7119146529757499720}
+  - component: {fileID: 3114802545145795038}
   - component: {fileID: 4250267251182535816}
   m_Layer: 0
   m_Name: Keypad Button
@@ -164,6 +165,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.57, y: 2.57}
   m_EdgeRadius: 0
+--- !u!95 &3114802545145795038
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987272066844572780}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09bc5f80f1e3e244989c5239b2c62d02, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4250267251182535816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +201,9 @@ MonoBehaviour:
   manager: {fileID: 0}
   value: 94
   valueRenderer: {fileID: 4196758696294030970}
+  animator: {fileID: 3114802545145795038}
+  emptyAnim: Keypad Button - Empty Animation
+  clickAnim: Keypad Button - Click Animation
 --- !u!1 &4148708873465944014
 GameObject:
   m_ObjectHideFlags: 0

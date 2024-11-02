@@ -160,11 +160,11 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("Welcome to the <b>Exponent Club</b>! I’m Minraul, and as you can guess, we play the <b>exponent game</b> here! Oh, you’ve never played the game before? Well, I guess I’ll just have to teach you then!"));
+                pages.Add(new Page("Welcome to the Exponent Club! I'm Minraul, and as you can guess, we play the exponent game here! Oh, you've never played the game before? Well, I guess I'll just have to teach you then!"));
                 pages.Add(new Page("In the exponent game, you answer exponent questions as fast as you can to gain points and reach the goal before your opponent. The questions all have missing values, which you need to fill in correctly and in the right order."));
-                pages.Add(new Page("The game will give you values to choose from to try and fill in empty slots. The way this is handled can vary by match, but they’re all self-explanatory. Outside of selecting values, you can also use <b>skips</b> and <b>powers</b>."));
-                pages.Add(new Page("<b>Skips</b> allow you to skip your current question and get a new one. Naturally, this means you get no points since you didn’t finish the question. Skipping also has a cooldown to it, so it’s best not to use it constantly."));
-                pages.Add(new Page("As for <b>powers</b>, I’ll talk more about them later. With all that explained, issue a challenge to me to start your first match! You can do so by selecting my icon in the world area."));
+                pages.Add(new Page("The game will give you values to choose from to try and fill in empty slots. The way this is handled can vary by match, but they're all self-explanatory. Outside of selecting values, you can also use skips and powers."));
+                pages.Add(new Page("Skips allow you to skip your current question and get a new one. Naturally, this means you get no points since you didn't finish the question. Skipping also has a cooldown to it, so it's best not to use it constantly."));
+                pages.Add(new Page("As for powers, I'll talk more about them later. With all that explained, issue a challenge to me to start your first match! You can do so by selecting my icon in the world area."));
             }
 
 
@@ -222,8 +222,8 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("You won your first match! Now that you’re familiar with the rules, you can take on the other club members. Some of them won’t accept your challenge until you become more experienced, so your options are restricted."));
-                pages.Add(new Page("Some club members utilize exponent rules that you haven’t learned yet. When you encounter a new rule, I’ll be there to explain it. Feel free to check the ‘info menu’ as well if you ever need a refresher. Good luck!"));
+                pages.Add(new Page("You won your first match! Now that you're familiar with the rules, you can take on the other club members. Some of them won't accept your challenge until you become more experienced, so your options are restricted."));
+                pages.Add(new Page("Some club members utilize exponent rules that you haven't learned yet. When you encounter a new rule, I'll be there to explain it. Feel free to check the ‘info menu' as well if you ever need a refresher. Good luck!"));
             }
 
             clearedFirstMatchWin = true;
@@ -246,9 +246,9 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("You just got a <b>match power</b>! A match power is a power-up that can be used during a match, but only after you charge it up. Powers charge up when you answer questions correctly, so just playing the game like usual is enough."));
-                pages.Add(new Page("After a power is fully charged, you can activate it with the ‘<b>power button</b>’ at anytime. The power’s effects remain active until the power’s energy runs out, after which you need to charge it up again."));
-                pages.Add(new Page("Unlocked powers can be viewed and equipped in the ‘<b>powers menu</b>’. Your opponents can use powers too, so keep that in mind. Good luck!"));
+                pages.Add(new Page("You just got a match power! A match power is a power-up that can be used during a match, but only after you charge it up. Powers charge up when you answer questions correctly, so just playing the game like usual is enough."));
+                pages.Add(new Page("After a power is fully charged, you can activate it with the ‘power button' at anytime. The power's effects remain active until the power's energy runs out, after which you need to charge it up again."));
+                pages.Add(new Page("Unlocked powers can be viewed and equipped in the ‘powers menu'. Your opponents can use powers too, so keep that in mind. Good luck!"));
             }
 
             clearedFirstPower = true;
@@ -269,7 +269,7 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("You’ve learned all the exponent rules and defeated all the other club members, so now it’s time for your <b>final match</b>! A rematch against me! Select my icon in the next area to challenge me like before."));
+                pages.Add(new Page("You've learned all the exponent rules and defeated all the other club members, so now it's time for your final match! A rematch against me! Select my icon in the next area to challenge me like before."));
             }
 
             clearedFinalMatch = true;
@@ -314,7 +314,7 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("This match only uses exponent basics. <b>Exponents</b> are math operations that multiply a base by itself a certain number of times. Check the info window if you ever want a refresh on the exponent rules."));
+                pages.Add(new Page("This match only uses exponent basics. Exponents are math operations that multiply a base by itself a certain number of times. Check the info window if you ever want a refresh on the exponent rules."));
             }
 
 
@@ -352,7 +352,7 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("This match uses the <b>product rule</b>. When the same bases with different exponents are multiplied together, the exponents can be summed together and applied to said base to simplify the operation."));
+                pages.Add(new Page("This match uses the product rule. When the same bases with different exponents are multiplied together, the exponents can be summed together and applied to said base to simplify the operation."));
             }
 
 
@@ -386,7 +386,7 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("This match uses the <b>power of a power rule</b>. If a base is having two exponents applied to it, then said exponents can be multiplied together, with the base being raised to the product of that operation."));
+                pages.Add(new Page("This match uses the power of a power rule. If a base is having two exponents applied to it, then said exponents can be multiplied together, with the base being raised to the product of that operation."));
             }
 
 
@@ -420,7 +420,7 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("This match uses the <b>power of a product rule</b>. If two bases with the same exponents are multiplied together, it can be simplified to the multiplication of said bases, with the result being raised to the shared exponent."));
+                pages.Add(new Page("This match uses the power of a product rule. If two bases with the same exponents are multiplied together, it can be simplified to the multiplication of said bases, with the result being raised to the shared exponent."));
             }
 
 
@@ -454,7 +454,7 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("This match uses the <b>zero rule</b>. Any number raised to the exponent 0 will return a result of 1."));
+                pages.Add(new Page("This match uses the zero rule. Any number raised to the exponent 0 will return a result of 1."));
             }
 
 
@@ -488,7 +488,7 @@ namespace RM_EM
             }
             else
             {
-                pages.Add(new Page("This match uses the <b>negative rule</b>. A number raised to a negative exponent will become its reciprocal, and have the exponent be applied to the denominator."));
+                pages.Add(new Page("This match uses the negative rule. A number raised to a negative exponent will become its reciprocal, and have the exponent be applied to the denominator."));
             }
 
 

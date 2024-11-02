@@ -5,8 +5,10 @@ using UnityEngine;
 namespace RM_EM
 {
     // The audio for the title screen.
-    public class TitleAudio : MonoBehaviour
+    public class TitleAudio : EM_GameAudio
     {
+        [Header("TitleAudio")]
+
         // Manager
         public TitleManager manager;
 
@@ -17,8 +19,10 @@ namespace RM_EM
         public AudioSource sfxSource;
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
+            base.Start();
+
             if (manager == null)
                 manager = TitleManager.Instance;
         }

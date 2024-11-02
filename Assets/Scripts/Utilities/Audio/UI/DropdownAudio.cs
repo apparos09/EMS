@@ -6,19 +6,13 @@ using UnityEngine.UI;
 namespace util
 {
     // Adds audio to a dropdown.
-    public class DropdownAudio : MonoBehaviour
+    public class DropdownAudio : UIElementAudio
     {
         // The dropdown this script is for.
         public Dropdown dropdown;
 
-        // THe audio for the user inputs.
-        public AudioSource audioSource;
-
-        // The audio clip for the toggle.
-        public AudioClip audioClip;
-
         // Awake is called when the script instance is being loaded.
-        private void Awake()
+        protected override void Awake()
         {
             // Moved here in case the dropdown has not been set enabled before the game was closed.
 
@@ -29,12 +23,11 @@ namespace util
                 dropdown = GetComponent<Dropdown>();
             }
 
-            // Add to the onValueChanged function.
-            AddOnValueChanged();
+            base.Awake();
         }
 
         // Add OnValueChanged Delegate
-        public void AddOnValueChanged()
+        public override void AddOnValueChanged()
         {
             // If the dropdown isn't set, return.
             if (dropdown == null)
@@ -48,7 +41,7 @@ namespace util
         }
 
         // Remove OnValueChanged Delegate
-        public void RemoveOnValueChanged()
+        public override void RemoveOnValueChanged()
         {
             // If the dropdown isn't set, return.
             if (dropdown == null)
@@ -65,14 +58,9 @@ namespace util
         // Called when the dropdown has been changed.
         private void OnValueChanged(int value)
         {
-            if (audioSource != null && audioClip != null)
+            if (IsPlaySafe())
                 audioSource.PlayOneShot(audioClip);
         }
 
-        // Script is destroyed.
-        private void OnDestroy()
-        {
-            RemoveOnValueChanged();
-        }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Resources:
-// - https://docs.unity3d.com/ScriptReference/AudioSource-time.html
+// * https://docs.unity3d.com/ScriptReference/AudioSource-time.html
 
 namespace util
 {
@@ -14,16 +14,16 @@ namespace util
         // audio source
         public AudioSource audioSource = null;
 
-        // start and end of the audio clip being played. This is in seconds.
-        // Note: be aware that the time of the audio may not be accurate if the audio is compressed.
+        // Start and end of the audio clip being played. This is in seconds.
+        // NOTE: be aware that the time of the audio may not be accurate if the audio is compressed.
         // As such, it may be best not to use this.
 
-        // the start of the clip. If this value is negative, the clip continues like normal.
-        // if clip start is less than 0, then it doesn't function.
+        // The start of the clip. If this value is negative, the clip continues like normal.
+        // If clip start is less than 0, then it doesn't function.
         [Tooltip("The start of the clip in seconds.")]
         public float clipStart = 0.0F;
 
-        // the end of the clip
+        // The end of the clip
         // TODO: find out what happen if time is set greater than the length of an audio file.
         /// <summary>
         /// * I don't know what happens if the time is set beyond the clip length but I assume it just errors out.
@@ -47,6 +47,10 @@ namespace util
         [Tooltip("If true, clipStart is offset by where the audio is in reference to clipEnd when a loop is being performed.")]
         public bool loopRelative = true;
 
+        // If 'true', the clip loop is applied. If false, this script does not apply the clip loop.
+        [Tooltip("Enables the clip loop if true. It's recommended that this is set to false if the audio clip file loops perfectly.")]
+        public bool clipLoopEnabled = true;
+
         // Start is called before the first frame update
         protected virtual void Start()
         {
@@ -57,55 +61,103 @@ namespace util
             // gets the start and end of the clip if not set.
             if (audioSource != null)
             {
-                // if the clip start and end are both set to zero (i.e. they weren't set)
-                // clip start
-                if (clipStart <= 0.0F)
+                // If the clip start and end are both set to zero (i.e. they weren't set)
+                // Clip Start - avoid negative value.
+                if (clipStart < 0.0F)
                     clipStart = 0.0F;
 
-                // clip end
-                if (audioSource.clip != null && clipEnd <= 0.0F)
-                    clipEnd = audioSource.clip.length;
+                // Clip End - avoid negative value.
+                if (clipEnd < 0.0F)
+                    clipEnd = 0.0F;
 
-                // start at clip start instead of start of song.
-                if (playAtClipStart)
-                    audioSource.time = clipStart;
+                // If the audio source is set.
+                if(audioSource.clip != null)
+                {
+                    // If the clip end is less than 0, equal to 0, or is greater than the clip length...
+                    // Set it to the clip length.
+                    if (clipEnd <= 0.0F || clipEnd > audioSource.clip.length)
+                        clipEnd = audioSource.clip.length;
+
+                    // NOTE: this throws an error if clipStart is greater than the length of the audio.
+                    // Starts at clipStart instead of at the start of the audio itself.
+                    if (playAtClipStart)
+                    {
+                        // If the clipStart is less than the length of the clip, play at clipStart.
+                        if (clipStart < audioSource.clip.length)
+                            audioSource.time = clipStart;
+                    }
+                }                
+                    
             }
         }
 
         // Plays the audio - if limited to the clip start, it starts from the loop point.
-        public void PlayAudio()
+        public void PlayAudio(bool resetAudio, float delay)
         {
-            // audio source or audio clip doesn't exist.
+            // Audio source or audio clip doesn't exist.
             if (audioSource == null || audioSource.clip == null)
                 return;
 
-            // stops audio if it's currently playing.
+            // Stops audio if it's currently playing.
             audioSource.Stop();
 
-            // if the audio should start at the clip start when first played.
-            if (playAtClipStart && clipStart >= 0.0F && clipStart < audioSource.clip.length)
-                audioSource.time = clipStart;
-            else // start source at the start of the audio.
-                audioSource.time = 0.0F;
+            // If the audio should be reset.
+            if (resetAudio)
+            {
+                // If the audio should start at the clip start when first played.
+                if (playAtClipStart && clipStart >= 0.0F && clipStart < audioSource.clip.length)
+                {
+                    audioSource.time = clipStart;
+                }
+                else // Start source at the start of the audio.
+                {
+                    audioSource.time = 0.0F;
+                }
+            }
 
-            // plays the audio
-            audioSource.Play();
+            // Plays the audio. If there is a delay, use play delayed.
+            if(delay > 0)
+            {
+                audioSource.PlayDelayed(delay);
+            }
+            else
+            {
+                audioSource.Play();
+            }
+            
+        }
+
+        // Plays the audio with no delay.
+        public void PlayAudio(bool resetAudio)
+        {
+            PlayAudio(resetAudio, 0);
         }
 
         // Stops the audio
-        public void StopAudio()
+        // If 'resetAudio' is true, the audio is set back to its start.
+        public void StopAudio(bool resetAudio)
         {
-            // audio source or audio clip doesn't exist.
+            // Audio source or audio clip doesn't exist.
             if (audioSource == null || audioSource.clip == null)
                 return;
 
+            // Stops the audio source.
             audioSource.Stop();
 
-            // bring audio to clip start
-            if (playAtClipStart && clipStart >= 0.0F && clipStart < audioSource.clip.length)
-                audioSource.time = clipStart;
-            else // bring audio to start of the song
-                audioSource.time = 0.0F;
+            // If the audio should be reset.
+            if(resetAudio)
+            {
+                // Bring audio to clip start.
+                if (playAtClipStart && clipStart >= 0.0F && clipStart < audioSource.clip.length)
+                {
+                    audioSource.time = clipStart;
+                }
+                else // Bring audio to start of the song.
+                {
+                    audioSource.time = 0.0F;
+                }
+            }
+            
         }
 
         // If the audio is set to loop
@@ -124,44 +176,44 @@ namespace util
                 audioSource.loop = looping;
         }
 
-        // returns the length of the audio clip
+        // Returns the length of the audio clip
         public float GetClipLength()
         {
             return clipEnd - clipStart;
         }
 
-        // returns the value of clip start
+        // Returns the value of clip start
         public float GetClipStart()
         {
             return clipStart;
         }
 
-        // sets the value of clip start in seconds
-        // this only works if the audioClip has been set.
+        // Sets the value of clip start in seconds
+        // This only works if the audioClip has been set.
         public void SetClipStartInSeconds(float seconds)
         {
-            // if the audio source is null.
+            // If the audio source is null.
             if (audioSource == null)
                 return;
 
-            // if the audio clip is null.
+            // If the audio clip is null.
             if (audioSource.clip == null)
                 return;
 
 
-            // setting value to clip start.
+            // Setting value to clip start.
             clipStart = (seconds >= 0.0F && seconds <= audioSource.clip.length) ?
                 seconds : clipStart;
         }
 
-        // sets the clip start time as a percentage, with 0 being 0% and 1 being 100%.
+        // Sets the clip start time as a percentage, with 0 being 0% and 1 being 100%.
         public void SetClipStartAsPercentage(float t)
         {
-            // if the audio source is null.
+            // If the audio source is null.
             if (audioSource == null)
                 return;
 
-            // if the audio clip is null.
+            // If the audio clip is null.
             if (audioSource.clip == null)
                 return;
 
@@ -169,38 +221,38 @@ namespace util
             clipStart = Mathf.Lerp(0.0F, audioSource.clip.length, t);
         }
 
-        // returns the value of clip end
+        // Returns the value of clip end
         public float GetClipEnd()
         {
             return clipEnd;
         }
 
-        // sets the value of clip end in seconds
-        // this only works if the audioClip has been set.
+        // Sets the value of clip end in seconds
+        // This only works if the audioClip has been set.
         public void SetClipEndInSeconds(float seconds)
         {
-            // if the audio source is null.
+            // If the audio source is null.
             if (audioSource == null)
                 return;
 
-            // if the audio clip is null.
+            // If the audio clip is null.
             if (audioSource.clip == null)
                 return;
 
 
-            // setting value to clip start.
+            // Setting value to clip start.
             clipEnd = (seconds >= 0.0F && seconds <= audioSource.clip.length) ?
                 seconds : clipEnd;
         }
 
-        // sets the clip end time as a percentage, with 0 being 0% and 1 being 100%.
+        // Sets the clip end time as a percentage, with 0 being 0% and 1 being 100%.
         public void SetClipEndAsPercentage(float t)
         {
-            // if the audio source is null.
+            // If the audio source is null.
             if (audioSource == null)
                 return;
 
-            // if the audio clip is null.
+            // If the audio clip is null.
             if (audioSource.clip == null)
                 return;
 
@@ -208,57 +260,57 @@ namespace util
             clipEnd = Mathf.Lerp(0.0F, audioSource.clip.length, t);
         }
 
-        // gets the variable that says whether or not to start the song at the start of the clip.
+        // Gets the variable that says whether or not to start the song at the start of the clip.
         public bool GetPlayAtClipStart()
         {
             return playAtClipStart;
         }
 
-        // sets the play at clip start
+        // Sets the play at clip start
         public void SetPlayAtClipStart(bool pacs)
         {
             playAtClipStart = pacs;
 
-            // if the audio source is null.
+            // If the audio source is null.
             if (audioSource == null)
                 return;
 
-            // if the audio clip is null.
+            // If the audio clip is null.
             if (audioSource.clip == null)
                 return;
 
-            // if the audio should play at the start of the clip.
+            // If the audio should play at the start of the clip.
             if (playAtClipStart)
             {
-                // if the start of the clip is greater than the current time of the clip...
-                // the audioSouce is set to the start of the clip.
+                // If the start of the clip is greater than the current time of the clip...
+                // The audioSouce is set to the start of the clip.
                 if (clipStart > audioSource.time)
                     audioSource.time = clipStart;
             }
         }
 
         // TODO: check how well this works with compressed audio.
-        // sets the current time in clip as a percentage of the whole c
+        // Sets the current time in clip as a percentage of the whole c
         public void SetClipTime(float t)
         {
-            // sets the clip time
+            // Sets the clip time
             audioSource.time = Mathf.Clamp(t, 0, audioSource.clip.length);
         }
 
-        // sets the clip time as a percentage. Argument 'percent' ranges from 0 to 1.
+        // Sets the clip time as a percentage. Argument 'percent' ranges from 0 to 1.
         public void SetClipTimeAsPercentage(float percent)
         {
-            // sets the clip time
+            // Sets the clip time
             audioSource.time = audioSource.clip.length * Mathf.Clamp01(percent);
         }
 
         // Called to loop the clip back to its start.
         protected virtual void OnLoopClip()
         {
-            // checks to see if the audio is looping
+            // Checks to see if the audio is looping
             switch (audioSource.loop)
             {
-                case true: // audio is looping
+                case true: // Audio is looping
                     // Checks if clipStart should be offset relative to how far past clipEnd the audio currently is.
                     if(loopRelative) // Offset clip start.
                     {
@@ -282,8 +334,9 @@ namespace util
                     }
                     break;
 
-                case false: // audio is not looping
-                            // audio is stopped, and returns to clip start.
+                case false: // Audio is not looping
+                            
+                    // Audio is stopped, and returns to clip start.
                     audioSource.Stop();
                     audioSource.time = clipStart;
                     break;
@@ -293,13 +346,13 @@ namespace util
         // Update is called once per frame
         protected virtual void Update()
         {
-            // audio source, or the clip are not set.
+            // Audio source, or the clip are not set.
             if (audioSource == null)
                 return;
             if (audioSource.clip == null)
                 return;
 
-            // clamp clipStart and clipEnd
+            // Clamp clipStart and clipEnd
             // TODO: see if using if statements is less computationally expensive (2 conditional statements per clamp)
             clipStart = Mathf.Clamp(clipStart, 0.0F, audioSource.clip.length);
             clipEnd = Mathf.Clamp(clipEnd, 0.0F, audioSource.clip.length);
@@ -309,7 +362,7 @@ namespace util
             {
                 return;
             }
-            // if the clip end is greater than the clip start, then the values are swapped.
+            // If the clip end is greater than the clip start, then the values are swapped.
             else if (clipStart > clipEnd)
             {
                 float temp = clipStart;
@@ -317,15 +370,15 @@ namespace util
                 clipEnd = temp;
             }
 
-            // if the audio source is playing
-            if (audioSource.isPlaying)
+            // If the clip loop is enabled, and the audio source is playing.
+            if (clipLoopEnabled && audioSource.isPlaying)
             {
-                // this isn't needed since using the Play() function in this class handles this.
-                // puts the audio source at the clip start.
+                // This isn't needed since using the Play() function in this class handles this.
+                // Puts the audio source at the clip start.
                 // if (audioSource.time < clipStart && !playAtClipStart)
                 //     audioSource.time = clipStart;
 
-                // the audioSource has reached the end of the clip.
+                // The audioSource has reached the end of the clip.
                 if (audioSource.time >= clipEnd)
                 {
                     // Call to loop the clip.

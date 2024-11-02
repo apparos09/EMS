@@ -6,19 +6,13 @@ using UnityEngine.UI;
 namespace util
 {
     // Plays audio when clicking a toggle.
-    public class ToggleAudio : MonoBehaviour
+    public class ToggleAudio : UIElementAudio
     {
         // The toggle this script is for.
         public Toggle toggle;
 
-        // THe audio for the user inputs.
-        public AudioSource audioSource;
-
-        // The audio clip for the toggle.
-        public AudioClip audioClip;
-
         // Awake is called when the script instance is being loaded.
-        private void Awake()
+        protected override void Awake()
         {
             // Moved here in case the toggle has not been set enabled before the game was closed.
 
@@ -29,12 +23,11 @@ namespace util
                 toggle = GetComponent<Toggle>();
             }
 
-            // Add to the onValueChanged function.
-            AddOnValueChanged();
+            base.Awake();
         }
 
         // Add OnValueChanged Delegate
-        public void AddOnValueChanged()
+        public override void AddOnValueChanged()
         {
             // If the toggle isn't set, return.
             if (toggle == null)
@@ -48,7 +41,7 @@ namespace util
         }
 
         // Remove OnValueChanged Delegate
-        public void RemoveOnValueChanged()
+        public override void RemoveOnValueChanged()
         {
             // If the toggle isn't set, return.
             if (toggle == null)
@@ -63,16 +56,10 @@ namespace util
 
 
         // Called when the toggle is clicked.
-        private void OnValueChanged(bool isOn)
+        protected virtual void OnValueChanged(bool isOn)
         {
-            if (audioSource != null && audioClip != null)
+            if (IsPlaySafe())
                 audioSource.PlayOneShot(audioClip);
-        }
-
-        // Script is destroyed.
-        private void OnDestroy()
-        {
-            RemoveOnValueChanged();
         }
     }
 }

@@ -6,19 +6,13 @@ using UnityEngine.UI;
 namespace util
 {
     // Adds audio to a slider.
-    public class SliderAudio : MonoBehaviour
+    public class SliderAudio : UIElementAudio
     {
         // The slider this script is for.
         public Slider slider;
 
-        // THe audio for the user inputs.
-        public AudioSource audioSource;
-
-        // The audio clip for the toggle.
-        public AudioClip audioClip;
-
         // Awake is called when the script instance is being loaded.
-        private void Awake()
+        protected override void Awake()
         {
             // Moved here in case the slider has not been set enabled before the game was closed.
 
@@ -29,12 +23,11 @@ namespace util
                 slider = GetComponent<Slider>();
             }
 
-            // Add to the onValueChanged function.
-            AddOnValueChanged();
+            base.Awake();
         }
 
         // Add OnValueChanged Delegate
-        public void AddOnValueChanged()
+        public override void AddOnValueChanged()
         {
             // If the slider isn't set, return.
             if (slider == null)
@@ -48,7 +41,7 @@ namespace util
         }
 
         // Remove OnValueChanged Delegate
-        public void RemoveOnValueChanged()
+        public override void RemoveOnValueChanged()
         {
             // If the slider isn't set, return.
             if (slider == null)
@@ -65,14 +58,9 @@ namespace util
         // Called when the slider has been changed.
         private void OnValueChanged(float value)
         {
-            if (audioSource != null && audioClip != null)
+            if (IsPlaySafe())
                 audioSource.PlayOneShot(audioClip);
         }
 
-        // Script is destroyed.
-        private void OnDestroy()
-        {
-            RemoveOnValueChanged();
-        }
     }
 }
