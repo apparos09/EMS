@@ -223,7 +223,7 @@ namespace RM_EM
             else
             {
                 pages.Add(new Page("You won your first match! Now that you're familiar with the rules, you can take on the other club members. Some of them won't accept your challenge until you become more experienced, so your options are restricted."));
-                pages.Add(new Page("Some club members utilize exponent rules that you haven't learned yet. When you encounter a new rule, I'll be there to explain it. Feel free to check the ‘info menu' as well if you ever need a refresher. Good luck!"));
+                pages.Add(new Page("Some club members utilize exponent rules that you haven't learned yet. When you encounter a new rule, I'll be there to explain it. Feel free to check the 'info menu' as well if you ever need a refresher. Good luck!"));
             }
 
             clearedFirstMatchWin = true;
@@ -247,8 +247,8 @@ namespace RM_EM
             else
             {
                 pages.Add(new Page("You just got a match power! A match power is a power-up that can be used during a match, but only after you charge it up. Powers charge up when you answer questions correctly, so just playing the game like usual is enough."));
-                pages.Add(new Page("After a power is fully charged, you can activate it with the ‘power button' at anytime. The power's effects remain active until the power's energy runs out, after which you need to charge it up again."));
-                pages.Add(new Page("Unlocked powers can be viewed and equipped in the ‘powers menu'. Your opponents can use powers too, so keep that in mind. Good luck!"));
+                pages.Add(new Page("After a power is fully charged, you can activate it with the 'power button' at anytime. The power's effects remain active until the power's energy runs out, after which you need to charge it up again."));
+                pages.Add(new Page("Unlocked powers can be viewed and equipped in the 'powers menu'. Your opponents can use powers too, so keep that in mind. Good luck!"));
             }
 
             clearedFirstPower = true;

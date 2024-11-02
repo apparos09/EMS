@@ -2513,6 +2513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585efb929d9a94446adc22f9ad380909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxSourceUI: {fileID: 1828613573}
+  autoSetUIAudioSources: 1
   manager: {fileID: 0}
   bgmSource: {fileID: 1815120852}
   sfxSource: {fileID: 1828613573}

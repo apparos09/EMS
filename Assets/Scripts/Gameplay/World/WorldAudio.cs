@@ -5,8 +5,10 @@ using UnityEngine;
 namespace RM_EM
 {
     // The world audio.
-    public class WorldAudio : MonoBehaviour
+    public class WorldAudio : EM_GameAudio
     {
+        [Header("WorldAudio")]
+
         // Manager
         public WorldManager manager;
 
@@ -16,14 +18,16 @@ namespace RM_EM
         // The SFX audio source.
         public AudioSource sfxSource;
 
-        [Header("Audio Clips/SFXs")]
+        [Header("WorldAudio/Audio Clips/SFXs")]
 
         // The audio clip for buttons.
         public AudioClip buttonSfx;
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
+            base.Start();
+
             if (manager == null)
                 manager = WorldManager.Instance;
         }

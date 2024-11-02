@@ -694,14 +694,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioCredits: {fileID: 943433274}
-  songTitleText: {fileID: 115672844}
+  audioTitleText: {fileID: 115672844}
   artistText: {fileID: 1655416769}
   collectionText: {fileID: 1657967973}
   sourceText: {fileID: 1499400818}
   link1Text: {fileID: 1279096848}
   link2Text: {fileID: 1153478381}
   copyrightText: {fileID: 2086693200}
-  pageNumberText: {fileID: 1152301792}
+  creditNumberText: {fileID: 1152301792}
 --- !u!1001 &403048271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -820,7 +820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170320487686391547, guid: 4614534228b58824999e5ec17a963236, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PreviousPage
+      value: PreviousCredit
       objectReference: {fileID: 0}
     - target: {fileID: 8170320487686391547, guid: 4614534228b58824999e5ec17a963236, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1136,9 +1136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 522159042}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 522159042}
 --- !u!4 &532776828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 645056177624515696, guid: 77d20c29592071e46864ec27c02bcb95, type: 3}
@@ -1250,7 +1250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8170320487686391547, guid: 4614534228b58824999e5ec17a963236, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NextPage
+      value: NextCredit
       objectReference: {fileID: 0}
     - target: {fileID: 8170320487686391547, guid: 4614534228b58824999e5ec17a963236, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1566,9 +1566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 659688677}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 659688677}
 --- !u!1 &685180019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,9 +1715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 685180021}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 685180021}
 --- !u!1 &729324339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,9 +2156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 753241256}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 753241256}
 --- !u!1 &783969250
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,6 +2534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9438d8b418656484cb32854f211c9f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxSourceUI: {fileID: 2059196287809671290}
+  autoSetUIAudioSources: 1
   manager: {fileID: 0}
   bgmSource: {fileID: 2097133220529899306}
   sfxSource: {fileID: 2059196287809671290}
@@ -2845,9 +2847,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1093687675}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 1093687675}
 --- !u!1 &1128924533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,9 +3008,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1128924535}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 1128924535}
 --- !u!1 &1152301790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,9 +3437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1235897262}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 1235897262}
 --- !u!1 &1277867189
 GameObject:
   m_ObjectHideFlags: 0
@@ -5014,9 +5016,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1740944785}
   audioSource: {fileID: 2059196287809671290}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 1740944785}
 --- !u!1001 &1776066832
 PrefabInstance:
   m_ObjectHideFlags: 0

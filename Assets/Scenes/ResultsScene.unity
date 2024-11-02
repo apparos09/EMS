@@ -394,9 +394,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 279375030}
   audioSource: {fileID: 615911613}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 279375030}
 --- !u!1 &283126122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,9 +1033,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 550985997}
   audioSource: {fileID: 615911613}
   audioClip: {fileID: 8300000, guid: 472c175259151be4fbfcbc9f69caf100, type: 3}
+  button: {fileID: 550985997}
 --- !u!1 &587197956
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,6 +2185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbf07e49b4c17544a5fded727787c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxSourceUI: {fileID: 615911613}
+  autoSetUIAudioSources: 1
   manager: {fileID: 0}
   bgmSource: {fileID: 1926097527}
   sfxSource: {fileID: 615911613}
