@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
+using System;
 
 // Initializes the LOL content and then enters the title screen.
 // This code was taken from Loader.cs (a file from the LOL template content) and then modified.
@@ -18,19 +19,19 @@ namespace RM_EM
         // Becomes 'true' when the game has been initialized.
         public bool initGame = false;
 
-        // LOL //
-        // Relative to Assets /StreamingAssets/
-        private const string languageJSONFilePath = "language.json";
-        private const string questionsJSONFilePath = "questions.json";
-        private const string startGameJSONFilePath = "startGame.json";
-
-        // Use to determine when all data is preset to load to next state.
-        // This will protect against async request race conditions in webgl.
-        LoLDataType _receivedData;
-
-        // This should represent the data you're expecting from the platform.
-        // Most games are expecting 2 types of data, Start and Language.
-        LoLDataType _expectedData = LoLDataType.START | LoLDataType.LANGUAGE;
+        // // LOL //
+        // // Relative to Assets /StreamingAssets/
+        // private const string languageJSONFilePath = "language.json";
+        // private const string questionsJSONFilePath = "questions.json";
+        // private const string startGameJSONFilePath = "startGame.json";
+        // 
+        // // Use to determine when all data is preset to load to next state.
+        // // This will protect against async request race conditions in webgl.
+        // LoLDataType _receivedData;
+        // 
+        // // This should represent the data you're expecting from the platform.
+        // // Most games are expecting 2 types of data, Start and Language.
+        // LoLDataType _expectedData = LoLDataType.START | LoLDataType.LANGUAGE;
 
         // // LOL - AutoSave //
         // // Added from the ExampleCookingGame. Used for feedback from autosaves.
@@ -38,13 +39,13 @@ namespace RM_EM
         // Coroutine feedbackMethod;
         // public TMP_Text feedbackText;
 
-        [System.Flags]
-        enum LoLDataType
-        {
-            START = 0,
-            LANGUAGE = 1 << 0,
-            QUESTIONS = 1 << 1
-        }
+        // [System.Flags]
+        // enum LoLDataType
+        // {
+        //     START = 0,
+        //     LANGUAGE = 1 << 0,
+        //     QUESTIONS = 1 << 1
+        // }
 
         void Awake()
         {
@@ -86,17 +87,25 @@ namespace RM_EM
             //     // initText.text = defs["kwd_loading"]; // Loading
             // }
 
+            // Moved to update.
+            // // Goes to the title scene.
+            // SceneManager.LoadScene("TitleScene");
+        }
+
+        // Update is called once per frame
+        protected virtual void Update()
+        {
             // Goes to the title scene.
             SceneManager.LoadScene("TitleScene");
         }
 
         private void OnDestroy()
         {
-#if UNITY_EDITOR
-            if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
-                return;
-#endif
-            // LOLSDK.Instance.SaveResultReceived -= OnSaveResult;
+// #if UNITY_EDITOR
+//             if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+//                 return;
+// #endif
+//             // LOLSDK.Instance.SaveResultReceived -= OnSaveResult;
         }
 
         // // On save result.
